@@ -1,0 +1,58 @@
+// src/app/blog/[slug]/page.tsx
+import { getPostBySlug, getAllPosts } from "@/lib/posts";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+type Params = Promise<{ slug: string }>;
+
+export async function generateStaticParams() {
+  const posts = getAllPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+
+  if (!post) {
+    return { title: "Post Not Found" };
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+  };
+}
+
+export default async function BlogPostPage({ params }: { params: Params }) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  return (
+    <article className="prose prose-lg mx-auto max-w-3xl px-4 py-12">
+      <header className="mb-8">
+        <time className="text-muted-foreground text-sm">
+          {new Date(post.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+        <h1 className="mt-2 text-4xl font-bold">{post.title}</h1>
+      </header>
+
+      <MDXRemote source={post.content} />
+    </article>
+  );
+}
