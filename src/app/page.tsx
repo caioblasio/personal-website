@@ -1,16 +1,18 @@
 import Image from "next/image";
+import Link from "next/link";
 import { TypewriterText } from "@/components/Typewritter";
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card";
+import { getAllPosts } from "@/lib/posts";
 
 export default function Home() {
+  const posts = getAllPosts();
+
   return (
     <main>
       <div className="mx-auto max-w-5xl px-6">
@@ -43,20 +45,40 @@ export default function Home() {
         <section className="my-12">
           <div className="flex flex-col gap-4">
             <h2 className="text-4xl font-bold">Articles</h2>
-            <div className="flex flex-row gap-4 w-full">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Card Title</CardTitle>
-                  <CardDescription>Card Description</CardDescription>
-                  <CardAction>Card Action</CardAction>
-                </CardHeader>
-                <CardContent>
-                  <p>Card Content</p>
-                </CardContent>
-                <CardFooter>
-                  <p>Card Footer</p>
-                </CardFooter>
-              </Card>
+            <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+              {posts.slice(0, 8).map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="block hover:scale-[1.01] transition-transform hover:bg-neutral-100 dark:hover:bg-neutral-900"
+                >
+                  <Card
+                    className={
+                      post.image ? "pt-0 overflow-hidden" : "overflow-hidden"
+                    }
+                  >
+                    {post.image && (
+                      <div className="relative w-full h-36">
+                        <Image
+                          src={post.image}
+                          alt={post.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <CardHeader>
+                      <CardTitle>
+                        <h3>{post.title}</h3>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>Card Content</CardContent>
+                    <CardFooter>
+                      <p>{post.date}</p>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

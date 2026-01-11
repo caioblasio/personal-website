@@ -26,7 +26,7 @@ export default function RootLayout({
       <body
         className={cn(
           poppins.variable,
-          "antialiased bg-white text-neutral-900 dark:bg-black dark:text-neutral-100"
+          "antialiased text-neutral-900 dark:text-neutral-100"
         )}
       >
         <Providers>

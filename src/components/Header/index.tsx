@@ -4,7 +4,7 @@ import { MobileMenu } from "./mobile-menu";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-10 bg-white/75 py-2 dark:bg-black/75 sm:py-3 backdrop-blur-xl">
+    <header className="sticky top-0 z-10 bg-foreground py-2 dark:bg-background sm:py-3 backdrop-blur-xl">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         {/* Left */}
         <Link href="/" className="flex items-center gap-3">

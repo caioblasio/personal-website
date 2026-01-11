@@ -1,9 +1,39 @@
 ---
-title: "My First Post"
+title: "Understanding React Server Components (RSC)"
 date: "2025-01-01"
+image: "/images/rsc.png"
 description: "A short description"
 ---
 
-# Hello World
+![RSC](/images/rsc.png)
 
-This is my first blog post with **MDX** support.
+React Server Components (RSC) are one of the most impactful additions to the React ecosystem in recent years. They change how we think about rendering, data fetching, and bundle size—especially in frameworks like Next.js.
+
+In this post, we’ll explore what Server Components are, why they exist, and when you should use them.
+
+---
+
+## What Are React Server Components?
+
+React Server Components are components that:
+
+- Run **only on the server**
+- Never ship JavaScript to the browser
+- Can directly access backend resources (databases, file systems, APIs)
+
+They allow you to build parts of your UI without increasing your client-side bundle size.
+
+```tsx
+// This is a Server Component
+export default async function Posts() {
+  const posts = await db.post.findMany();
+
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```

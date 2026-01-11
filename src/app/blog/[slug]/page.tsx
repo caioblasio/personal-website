@@ -3,6 +3,7 @@ import { getPostBySlug, getAllPosts } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { MDXParser } from "@/components/MDXParser";
 
 type Params = Promise<{ slug: string }>;
 
@@ -52,7 +53,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         <h1 className="mt-2 text-4xl font-bold">{post.title}</h1>
       </header>
 
-      <MDXRemote source={post.content} />
+      <MDXRemote source={post.content} components={MDXParser} />
     </article>
   );
 }
