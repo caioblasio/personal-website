@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/Card";
 import { getAllPosts } from "@/lib/posts";
+import Polaroid from "@/components/Polaroid";
 
 export default function Home() {
   const posts = getAllPosts();
@@ -16,29 +17,36 @@ export default function Home() {
   return (
     <>
       <section>
-        <div className="flex flex-col gap-4">
-          <h1 className="text-5xl font-bold text-neutral-900 dark:text-neutral-100">
-            Hey, I&apos;m <span className="text-cyan-500">Caio</span>{" "}
-            <span className="inline-block origin-[70%_70%] animate-wave-hand text-5xl">
-              👋
-            </span>
-          </h1>
-          <TypewriterText />
+        <div className="flex flex-col md:flex-row gap-4">
           <div className="flex flex-col gap-4">
-            <p className="leading-loose">
-              I&apos;m a Web Tech Lead from Sao Paulo, Brazil, currently based
-              in Berlin, Germany. With over 9 years of experience, I specialize
-              in building scalable web applications and leading development
-              teams to success!
-            </p>
-            <p className="leading-loose">
-              I currently work at N26, one of Europe&apos;s top mobile banks.
-            </p>
-            <p className="leading-loose">
-              In my free time, I love exploring new places, playing music, and
-              staying active.
-            </p>
+            <h1 className="text-5xl font-bold text-neutral-900 dark:text-neutral-100">
+              Hey, I&apos;m <span className="text-cyan-500">Caio</span>{" "}
+              <span className="inline-block origin-[70%_70%] animate-wave-hand text-5xl">
+                👋
+              </span>
+            </h1>
+            <TypewriterText />
+            <div className="flex flex-col gap-4">
+              <p className="leading-loose">
+                I&apos;m a Web Tech Lead from Sao Paulo, Brazil, currently based
+                in Berlin, Germany. With over 9 years of experience, I
+                specialize in building scalable web applications and leading
+                development teams to success!
+              </p>
+              <p className="leading-loose">
+                I currently work at N26, one of Europe&apos;s top mobile banks.
+              </p>
+              <p className="leading-loose">
+                In my free time, I love exploring new places, playing music, and
+                staying active.
+              </p>
+            </div>
           </div>
+          <Polaroid
+            src="/images/caio-1.jpeg"
+            alt="Picture of Caio De Blasio"
+            caption="N26 Summer Event 2022"
+          />
         </div>
       </section>
       <section className="my-12">

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { MobileMenu } from "./mobile-menu";
+import { PiCoffee } from "react-icons/pi";
 
 export function Header() {
   return (
@@ -10,8 +10,8 @@ export function Header() {
           href="/"
           className="group flex items-center gap-3 transition-transform active:scale-95"
         >
-          <div className="relative h-9 w-9 overflow-hidden rounded-full ring-2 ring-gray-100 transition-all group-hover:ring-black/10 dark:ring-white/10">
-            <Image src="/file.svg" alt="Avatar" fill className="object-cover" />
+          <div className="relative h-7 w-7 overflow-hidden rounded-full transition-all group-hover:ring-black/10 dark:ring-white/10">
+            <PiCoffee size={28} />
           </div>
           <span className="hidden font-bold tracking-tight md:inline">
             Caio

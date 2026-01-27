@@ -9,6 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --animate-wave-hand: wave 2s infinite;
+  --font-handwriting: var(--font-handwriting), cursive;
 }
 
 @media (prefers-color-scheme: dark) {

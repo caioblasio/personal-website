@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Poppins, Caveat } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -10,6 +10,12 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "700"],
+});
+
+const handwriting = Caveat({
+  variable: "--font-handwriting",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -27,15 +33,18 @@ export default function RootLayout({
       <body
         className={cn(
           poppins.variable,
+          handwriting.variable,
           "antialiased text-neutral-900 dark:text-neutral-100",
         )}
       >
         <Providers>
-          <Header />
-          <main>
-            <div className="mx-auto max-w-5xl px-6 py-12">{children}</div>
-          </main>
-          <Footer />
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="grow">
+              <div className="mx-auto max-w-5xl px-6 py-12">{children}</div>
+            </main>
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>

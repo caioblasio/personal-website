@@ -44,7 +44,7 @@ export function MobileMenu() {
 
                   <ul className="flex h-full w-full flex-col items-center justify-center gap-10">
                     <li>
-                      <Link href="/about" onClick={() => setOpen(false)}>
+                      <Link href="/" onClick={() => setOpen(false)}>
                         Home
                       </Link>
                     </li>
