@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Providers } from "./providers";
 import { cn } from "@/lib/utils/cn";
 
@@ -26,12 +27,15 @@ export default function RootLayout({
       <body
         className={cn(
           poppins.variable,
-          "antialiased text-neutral-900 dark:text-neutral-100"
+          "antialiased text-neutral-900 dark:text-neutral-100",
         )}
       >
         <Providers>
           <Header />
-          {children}
+          <main>
+            <div className="mx-auto max-w-5xl px-6 py-12">{children}</div>
+          </main>
+          <Footer />
         </Providers>
       </body>
     </html>

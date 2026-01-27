@@ -1,0 +1,138 @@
+---
+title: "Modernizing Systems with the Strangler Fig Pattern"
+date: "2025-01-07"
+description: "The Strangler Fig Pattern enables incremental migration from legacy monoliths to modern frameworks like Remix, avoiding risks."
+---
+
+In the world of software engineering, "ripping and replacing" a legacy system is often a recipe for disaster. It’s expensive, risky, and frequently results in "Second System Syndrome"—where the new version never quite reaches parity with the old one.
+
+The **Strangler Fig Pattern** offers a more organic, less destructive path. Inspired by the way certain vines grow in the rainforest, this pattern allows you to incrementally migrate a legacy system to a new architecture until the old system is eventually "strangled" and can be removed.
+
+---
+
+## Case Study: Migrating the N26 Website to Remix
+
+A prime example of this pattern in action is the migration of the **N26 website** to the **Remix framework**. By using the Strangler Fig approach, the team accomplished a massive architectural shift without disrupting the user experience.
+
+### The Results:
+
+- **Performance:** Improved average performance by **25%**.
+- **User Impact:** Delivered a faster, more responsive platform with zero downtime during the transition.
+- **Scalability:** Created a modern foundation capable of handling global traffic with higher efficiency.
+
+## How It Works: The Rainforest Analogy
+
+The pattern is named after the _Ficus aurea_. A seed germinates in the upper branches of a host tree. As it grows, it sends roots down to the soil and branches upward to the sunlight. Eventually, the fig surrounds the host tree so completely that the original tree dies, leaving a hollow but sturdy strangler fig in its place.
+
+In software, the **host tree** is your legacy monolith, and the **strangler fig** is your new microservice or modern application.
+
+### The Three Stages of Migration
+
+To implement this pattern effectively, you generally follow a three-step cycle for every piece of functionality you move:
+
+1.  **Transform:** Develop a new component or service that handles a specific subset of the legacy system's features.
+2.  **Coexist:** Use a **Proxy** or **Facade** (often an API Gateway) to route traffic. New requests go to the new service, while the rest continue to hit the legacy system.
+3.  **Eliminate:** Once the new service is proven stable, you decommission the old code path.
+
+---
+
+## Why Engineers Love It
+
+- **Reduced Risk:** Because you are deploying small changes frequently, if something breaks, the "blast radius" is tiny.
+- **Continuous Value:** You don't have to wait two years for a total rewrite to show progress. You can ship a modernized feature while the rest of the app remains legacy.
+- **Flexibility:** You can pause the migration at any time if business priorities shift.
+
+### Implementation Checklist
+
+- **Interception Layer:** An API Gateway or Load Balancer that decides where to send incoming traffic.
+- **Legacy Monolith:** The "host" that stays functional while you chip away at it
+- **Modern Service:** The new, decoupled code (often built with modern frameworks).
+
+---
+
+## Node.js Implementation Example
+
+This example demonstrates a basic **interception layer** using Express.js. This proxy routes requests for a new feature to a new service, while all other requests are forwarded to the legacy monolith.
+
+### 1. Project Setup
+
+```bash
+mkdir strangler-proxy-example
+cd strangler-proxy-example
+npm init -y
+npm install express http-proxy-middleware
+```
+
+### 2. The Legacy Monolith (legacy-monolith.js)
+
+_Running on port 3001_
+
+```js
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello from the Legacy Monolith!");
+});
+
+app.get("/api/users", (req, res) => {
+  res.json({ source: "Legacy", users: ["Alice", "Bob"] });
+});
+
+app.listen(3001, () => console.log("Legacy Monolith on port 3001"));
+```
+
+### 3. The New Service (new-service.js)
+
+_Running on port 3002_
+
+```js
+const express = require("express");
+const app = express();
+
+app.get("/api/modern-feature", (req, res) => {
+  res.json({ source: "New Service", status: "Active" });
+});
+
+app.listen(3002, () => console.log("New Service on port 3002"));
+```
+
+### 4. The Strangler Proxy (proxy-server.js)
+
+_The "brain" running on port 3000_
+
+```js
+const express = require("express");
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
+const app = express();
+
+// 1. Route specific paths to the NEW service
+app.use(
+  "/api/modern-feature",
+  createProxyMiddleware({
+    target: "http://localhost:3002",
+    changeOrigin: true,
+  }),
+);
+
+// 2. Default route: everything else goes to the LEGACY system
+app.use(
+  "/",
+  createProxyMiddleware({
+    target: "http://localhost:3001",
+    changeOrigin: true,
+  }),
+);
+
+app.listen(3000, () => {
+  console.log("Strangler Proxy active on http://localhost:3000");
+});
+```
+
+## Potential Pitfalls
+
+- **The Shared Database**: If both systems share the same database, you risk data corruption or tight coupling.
+- **Latency**: Adding a proxy layer adds a small amount of overhead to every request.
+- **Ghost Legacy**: If you stop halfway, you end up supporting two systems indefinitely.
+- **Pro-Tip**: Start with the "edge" cases or the most frequently changed features. Don't try to migrate the most complex core on day one.

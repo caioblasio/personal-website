@@ -45,6 +45,11 @@ export function MobileMenu() {
                   <ul className="flex h-full w-full flex-col items-center justify-center gap-10">
                     <li>
                       <Link href="/about" onClick={() => setOpen(false)}>
+                        Home
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/about" onClick={() => setOpen(false)}>
                         About
                       </Link>
                     </li>
@@ -58,7 +63,7 @@ export function MobileMenu() {
               </RemoveScroll>
             )}
           </AnimatePresence>,
-          document.body
+          document.body,
         )}
     </>
   );

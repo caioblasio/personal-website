@@ -1,9 +1,11 @@
-// src/app/blog/[slug]/page.tsx
+import Link from "next/link";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import { getPostBySlug, getAllPosts } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { MDXParser } from "@/components/MDXParser";
+import { Button } from "@/components/ui/Button";
 
 type Params = Promise<{ slug: string }>;
 
@@ -41,19 +43,29 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   }
 
   return (
-    <article className="prose prose-lg mx-auto max-w-3xl px-4 py-12">
-      <header className="mb-8">
-        <time className="text-muted-foreground text-sm">
-          {new Date(post.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </time>
-        <h1 className="mt-2 text-4xl font-bold">{post.title}</h1>
-      </header>
+    <div className="flex flex-col gap-4 px-4">
+      <div>
+        <Button variant="outline" size="sm" asChild>
+          <Link href="/blog">
+            <IoIosArrowRoundBack /> Ver todos
+          </Link>
+        </Button>
+      </div>
 
-      <MDXRemote source={post.content} components={MDXParser} />
-    </article>
+      <article className="prose prose-lg">
+        <header className="mb-8">
+          <time className="text-muted-foreground text-sm">
+            {new Date(post.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </time>
+          <h1 className="mt-2 text-4xl font-bold">{post.title}</h1>
+        </header>
+
+        <MDXRemote source={post.content} components={MDXParser} />
+      </article>
+    </div>
   );
 }

@@ -9,7 +9,7 @@ export function TypewriterText() {
     <div className="text-5xl text-black dark:text-white">
       <Typewriter
         options={{
-          strings: ["Web Tech Lead", "Travel Enthusiast", "Musician"],
+          strings: ["Web Tech Lead", "Traveler", "Musician"],
           autoStart: true,
           loop: true,
           delay: 100,
