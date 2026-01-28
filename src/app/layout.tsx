@@ -43,11 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(
-          poppins.variable,
-          handwriting.variable,
-          "antialiased text-neutral-900 dark:text-neutral-100",
-        )}
+        className={cn(poppins.variable, handwriting.variable, "antialiased")}
       >
         <Providers>
           <div className="flex min-h-screen flex-col">

@@ -1,28 +1,37 @@
 @import "tailwindcss";
 
+/* 1. Define the custom variant for Tailwind 4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 2. Define your variables */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
+/* 3. Redefine them for dark mode */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+/* 4. Map them to Tailwind's theme system */
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --animate-wave-hand: wave 2s infinite;
   --font-handwriting: var(--font-handwriting), cursive;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* 5. Clean up the body styling */
+@layer base {
+  body {
+    /* Use the Tailwind names we just defined in @theme */
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-poppins), system-ui, sans-serif;
 }
 
 @keyframes wave {
@@ -34,4 +43,3 @@ body {
   75% { transform: rotate(10deg); }
   100% { transform: rotate(0deg); }
 }
-

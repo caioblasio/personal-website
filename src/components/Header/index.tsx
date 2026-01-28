@@ -1,8 +1,24 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import Image from "next/image";
+import { HiMoon, HiSun } from "react-icons/hi2"; // Modern rounded icons
 import { MobileMenu } from "./mobile-menu";
 
 export function Header() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Avoid hydration mismatch by waiting for mount
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setMounted(true);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-black/5 backdrop-blur-lg dark:border-white/10">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
@@ -22,7 +38,8 @@ export function Header() {
             Caio
           </span>
         </Link>
-        <div className="flex items-center gap-2 md:gap-6">
+
+        <div className="flex items-center gap-2 md:gap-4">
           <nav className="hidden items-center gap-1 text-sm font-medium md:flex">
             <Link
               className="rounded-full px-4 py-2 text-gray-600 transition-colors hover:bg-gray-100 hover:text-black dark:text-gray-400 dark:hover:bg-white/10 dark:hover:text-white"
@@ -37,6 +54,23 @@ export function Header() {
               Blog
             </Link>
           </nav>
+
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="cursor-pointer rounded-full p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-white/10 transition-all active:scale-90"
+            aria-label="Toggle Dark Mode"
+          >
+            {mounted ? (
+              theme === "dark" ? (
+                <HiSun size={20} className="text-yellow-400" />
+              ) : (
+                <HiMoon size={20} />
+              )
+            ) : (
+              <div className="h-5 w-5" /> // Placeholder to prevent layout shift
+            )}
+          </button>
+
           <Link
             href="mailto:caioblasio@gmail.com"
             aria-label="Email"
@@ -44,6 +78,7 @@ export function Header() {
           >
             Contact
           </Link>
+
           <div className="flex md:hidden">
             <MobileMenu />
           </div>
