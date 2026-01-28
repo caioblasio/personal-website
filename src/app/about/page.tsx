@@ -92,7 +92,7 @@ export default function About() {
             <p className="leading-relaxed">
               I am Frontend Tech Lead with 9 years of software development
               experience, currently driving the N26 website, one of
-              EuropeEurope&apos;s leading mobile banks. I lead a team of 4 web
+              Europe&apos;s leading mobile banks. I lead a team of 4 web
               engineers while staying deeply involved in solution architecture,
               performance optimization, and coding. Acting as the main bridge
               between product and engineering, I combine technical leadership
