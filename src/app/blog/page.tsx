@@ -1,5 +1,16 @@
 import Link from "next/link";
+import { Metadata } from "next";
 import { getAllPosts } from "@/lib/posts";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    url: "/blog",
+  },
+};
 
 export default function Blog() {
   const posts = getAllPosts();

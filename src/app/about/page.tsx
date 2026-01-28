@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Metadata } from "next";
 import * as TechIcons from "./icons";
 import {
   Tooltip,
@@ -6,9 +6,17 @@ import {
   TooltipTrigger,
 } from "@/components/ui/Tooltip";
 import { JobPosition } from "./job-position";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
 import { SocialLinks } from "@/components/SocialLinks";
+
+export const metadata: Metadata = {
+  title: "About",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    url: "/about",
+  },
+};
 
 const skills = [
   {

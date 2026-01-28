@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { TypewriterText } from "@/components/Typewritter";
 import {
   Card,
@@ -10,6 +11,12 @@ import {
 } from "@/components/ui/Card";
 import { getAllPosts } from "@/lib/posts";
 import Polaroid from "@/components/Polaroid";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://caioblasio.com",
+  },
+};
 
 export default function Home() {
   const posts = getAllPosts();
@@ -28,13 +35,14 @@ export default function Home() {
             <TypewriterText />
             <div className="flex flex-col gap-4">
               <p className="leading-loose">
-                I&apos;m a Web Tech Lead from Sao Paulo, Brazil, currently based
-                in Berlin, Germany. With over 9 years of experience, I
-                specialize in building scalable web applications and leading
-                development teams to success!
+                I&apos;m a Senior Frontend Engineer from Sao Paulo, Brazil,
+                currently based in Berlin, Germany. With over 9 years of
+                experience, I specialize in building scalable web applications
+                and leading development teams to success!
               </p>
               <p className="leading-loose">
-                I currently work at N26, one of Europe&apos;s top mobile banks.
+                I currently work at N26 as a Tech Lead for Web, one of
+                Europe&apos;s top mobile banks.
               </p>
               <p className="leading-loose">
                 In my free time, I love exploring new places, playing music, and

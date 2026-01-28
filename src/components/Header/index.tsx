@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MobileMenu } from "./mobile-menu";
-import { PiCoffee } from "react-icons/pi";
 
 export function Header() {
   return (
@@ -11,7 +11,12 @@ export function Header() {
           className="group flex items-center gap-3 transition-transform active:scale-95"
         >
           <div className="relative h-7 w-7 overflow-hidden rounded-full transition-all group-hover:ring-black/10 dark:ring-white/10">
-            <PiCoffee size={28} />
+            <Image
+              src="/images/logo-256x256.png"
+              alt="Caio De Blasio"
+              width={28}
+              height={28}
+            />
           </div>
           <span className="hidden font-bold tracking-tight md:inline">
             Caio
