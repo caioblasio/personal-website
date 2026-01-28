@@ -10,7 +10,7 @@ export const SocialLinks = ({ size = 24 }: SocialLinksProps) => {
   return (
     <>
       <Link
-        href="https://github.com/caiodeblasio"
+        href="https://github.com/caioblasio"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub"
@@ -18,14 +18,19 @@ export const SocialLinks = ({ size = 24 }: SocialLinksProps) => {
         <FaGithub size={size} />
       </Link>
       <Link
-        href="https://linkedin.com/in/caiodeblasio"
+        href="https://linkedin.com/in/caioblasio"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn"
       >
         <FaLinkedin size={size} />
       </Link>
-      <Link href="mailto:caioblasio@gmail.com" aria-label="Email">
+      <Link
+        href="mailto:caioblasio@gmail.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Email"
+      >
         <MdEmail size={size} />
       </Link>
     </>

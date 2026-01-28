@@ -54,7 +54,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   }
 
   return (
-    <div className="flex flex-col gap-4 px-4">
+    <div className="flex flex-col gap-4">
       <div>
         <Button variant="outline" size="sm" asChild>
           <Link href="/blog">
