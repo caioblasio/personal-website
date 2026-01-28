@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/Card";
 import { getAllPosts } from "@/lib/posts";
 import Polaroid from "@/components/Polaroid";
+import { cn } from "@/lib/utils/cn";
 
 export const metadata: Metadata = {
   alternates: {
@@ -68,9 +69,10 @@ export default function Home() {
                 className="block hover:scale-[1.01] transition-transform hover:bg-neutral-100 dark:hover:bg-neutral-900"
               >
                 <Card
-                  className={
-                    post.image ? "pt-0 overflow-hidden" : "overflow-hidden"
-                  }
+                  className={cn(
+                    post.image ? "pt-0 overflow-hidden" : "overflow-hidden",
+                    "h-full",
+                  )}
                 >
                   {post.image && (
                     <div className="relative w-full h-32">
@@ -87,7 +89,7 @@ export default function Home() {
                       <h3 className="text-md font-semibold">{post.title}</h3>
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex-1">
                     <p className="text-sm">{post.description}</p>
                   </CardContent>
                   <CardFooter>

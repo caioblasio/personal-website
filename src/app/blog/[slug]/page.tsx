@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       <div>
         <Button variant="outline" size="sm" asChild>
           <Link href="/blog">
-            <IoIosArrowRoundBack /> Ver todos
+            <IoIosArrowRoundBack /> All Articles
           </Link>
         </Button>
       </div>

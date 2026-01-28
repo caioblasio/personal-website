@@ -1,0 +1,68 @@
+---
+title: "Choosing the right React architecture"
+date: "2026-01-07"
+description: "The trade-offs between SPA, SSR, and SSG, helping you balance SEO, performance, and cost."
+---
+
+In the early days of React, the Single Page Application (SPA) was the default. Today, frameworks like Next.js and Remix have popularized Server-Side Rendering (SSR) and Static Site Generation (SSG), making the decision-making process more complex but also more powerful.
+
+Choosing the right strategy is the difference between a site that feels "instant" and one that loses users to a loading spinner.
+
+---
+
+## 1. Single Page Application (SPA)
+
+In an SPA, the server sends a "skeleton" HTML file and a large JavaScript bundle. The browser downloads the JS, which then builds the entire UI on the client side.
+
+- **Best for:** Highly interactive applications where the user stays on one page for a long time (e.g., Dashboards, SaaS tools, Email clients).
+
+- **Pros:** Rich, fluid transitions between views.
+  - **Reduces server load** (the user's computer does the rendering).
+  - **Simplified development** for internal tools.
+
+- **Cons:** SEO Challenges: Search engine crawlers struggle to "read" content that hasn't rendered yet.
+  - **Slow Initial Load:** The user sees a blank screen or spinner while the JS bundle downloads.
+
+---
+
+## 2. Server-Side Rendering (SSR)
+
+With SSR, the server generates the full HTML for a page on every single request. The browser receives a complete document that it can display immediately.
+
+- **Best for:** Social media feeds, e-commerce product listings, and personalized dashboards that require SEO.
+
+- **Pros:** Excellent SEO: Search engines see the content immediately.
+  - **Fast Initial Paint:** Users see content much faster than in an SPA.
+  - **Always Fresh:** Since it renders on every request, the data is never stale.
+
+- **Cons:** Server Cost: Every request requires the server to "work," which can be expensive at scale.
+  - **Latency**: There is a slight delay while the server builds the page before sending it.
+
+---
+
+## 3. Static Site Generation (SSG)
+
+SSG creates the HTML files for every page at build time (when you deploy). These files are then served via a Content Delivery Network (CDN).
+
+- **Best for:** Blogs, documentation, marketing sites, and landing pages.
+
+- **Pros:** Extreme Performance: Serving a static file from a CDN is the fastest way to deliver web content.
+  - **Security:** There is no "live" database connection on the frontend to exploit.
+  - **Cheapest Hosting:** Static files cost almost nothing to host.
+
+- **Cons:** Stale Data: To update a typo or a price, you usually have to trigger a new build.
+  - **Build Times:** If you have 100,000 pages, your build process can take a very long time.
+
+---
+
+## The Modern Compromise: Hybrid Approaches
+
+You don't have to choose just one. Modern frameworks allow for a Hybrid Strategy:
+
+- SSG for your landing page and blog (Speed + SEO).
+
+- SSR for your dynamic search results (SEO + Fresh Data).
+
+- SPA for the logged-in user dashboard (Interactivity).
+
+**Pro Tip:** Look into Incremental Static Regeneration (ISR). It allows you to use SSG but tells the server to "re-bake" the static page in the background every X minutes, giving you the speed of static with the freshness of SSR.
